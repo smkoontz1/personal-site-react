@@ -22,7 +22,6 @@ export default function Navbar() {
   const router = useRouter()
   
   const navItemLinks = navItems.map(item => {
-    console.log(router)
     const isActive = router.pathname.startsWith(item.route)
     
     return (

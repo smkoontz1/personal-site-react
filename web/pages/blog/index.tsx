@@ -20,9 +20,6 @@ interface PostPreviewResponse {
 }
 
 export const Blog: NextPageWithLayout<Props> = ({ postPreviews }) => {
-
-  console.log(postPreviews[0])
-
   return (
     <div>
       <ul>
