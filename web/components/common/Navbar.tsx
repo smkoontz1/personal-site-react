@@ -10,7 +10,7 @@ interface NavItem {
 const navItems: NavItem[] = [
   {
     displayText: 'Photography',
-    route: '/photography'
+    route: '/photo'
   },
   {
     displayText: 'Blog',

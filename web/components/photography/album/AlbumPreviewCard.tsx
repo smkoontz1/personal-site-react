@@ -1,6 +1,6 @@
-import PreviewCard from "../../common/PreviewCard"
-import SanityClient from "../../../sanityClient"
-import imageUrlBuilder from '@sanity/image-url'
+import PreviewCard from '../../common/PreviewCard'
+import Link from 'next/link'
+import styles from '../../../styles/photo/album/Album.module.scss'
 
 interface Props {
   title: string,
@@ -16,41 +16,23 @@ export default function AlbumPreviewCard(props: Props) {
   } = props
 
   return (
-    <PreviewCard>
-      <>
-        {/* <p className='
-        text-white
-        absolute
-        '>
-          {title}
-        </p> */}
-        <div className='relative'>
-          <img src={coverImgUrl} />
-          <div className='
-            absolute
-            top-0
-            bottom-0
-            left-0
-            right-0
-            flex
-            flex-row
-            justify-center
-            items-center'
-            >
-            <p className='
-              text-center
-              text-white
-              text-3xl
-              tracking-wide
-              w-full
-              bg-black/75
-              p-3'
-            >
-              {title.toUpperCase()}
-            </p>
+    <div className={styles.albumPreviewCard}>
+      <PreviewCard>
+        <>
+          <div className='relative'>
+            <Link href='photo/album/[slug]' as={`photo/album/${slug}`}>
+              <a>
+                <img src={coverImgUrl} />
+                <div className={styles.albumPreviewTitleContainer}>
+                  <p className={styles.albumPreviewTitle}>
+                    {title.toUpperCase()}
+                  </p>
+                </div>
+              </a>
+            </Link>
           </div>
-        </div>
-      </>
-    </PreviewCard>
+        </>
+      </PreviewCard>
+    </div>
   )
 }
