@@ -1,0 +1,35 @@
+.imgFullScreen {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  
+  &.mainBg {
+    background-image: url('../../assets/images/bg_trees_1_web.jpg');
+  }
+
+  &.blogBg {
+    background-image: url('../../assets/images/blog_mountains_1_web.jpg');
+  }
+}
+
+.mainContainer {
+  @apply
+    container
+    mx-auto
+    min-h-screen
+}
+
+.contentContainer {
+  @apply
+    flex
+    flex-col
+    justify-center
+    items-center
+}
+
+.content {
+  @apply
+    mt-24
+    mb-24
+}

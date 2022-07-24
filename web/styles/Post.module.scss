@@ -1,0 +1,84 @@
+.postContainer {
+  &.page {
+    @apply
+      max-w-4xl
+  }
+
+  &.excerpt {
+    @apply
+      max-w-2xl
+      mb-5
+  }
+  
+  @apply
+    bg-white
+    bg-opacity-95
+    p-5
+    rounded-md
+}
+
+.postHeader {
+  h1 {
+    @apply
+      text-xl
+      font-semibold
+      uppercase
+  }
+
+  @apply
+    mb-5
+}
+
+.postBody {
+  h2 {
+    @apply
+      text-base
+      font-semibold
+      uppercase
+  }
+
+  p {
+    @apply
+      mt-5
+      mb-5
+  }
+
+  a {
+    @apply
+      underline
+      text-gray-700
+  }
+}
+
+.postImageContainer {
+  @apply
+    flex
+    justify-center
+}
+
+.postImage {
+  max-width: 50%;
+
+  p {
+    @apply
+      text-sm
+      text-center
+      mb-0
+      mt-2
+  }
+
+  @apply
+    flex
+    flex-col
+    justify-center
+    items-center
+}
+
+.readMoreLink {
+  @apply
+    mr-5
+    transition
+    duration-200
+    ease-in
+    transform hover:translate-x-1
+}

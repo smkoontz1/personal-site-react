@@ -3,6 +3,11 @@ import SanityClient from '../../sanityClient'
 import groq from 'groq'
 import imageUrlBuilder from '@sanity/image-url'
 import { PortableText } from '@portabletext/react'
+import styles from '../../styles/Post.module.scss'
+import { NextPageWithLayout } from '../_app'
+import { ReactElement } from 'react'
+import PostLayout from '../../components/blog/post/PostLayout'
+import MainLayout from '../../components/common/MainLayout'
 
 interface Props {
   post: any
@@ -32,7 +37,7 @@ const ptComponents = {
   }
 }
 
-const Post: NextPage<Props> = ({ post }) => {
+const Post: NextPageWithLayout<Props> = ({ post }) => {
   const {
     title,
     name,
@@ -40,25 +45,28 @@ const Post: NextPage<Props> = ({ post }) => {
     body = []
   } = post
 
-  console.log(post)
-
   return (
     <article>
-      <h1>{title}</h1>
-      <span>By {name}</span>
-      {authorImage && (
-        <div>
-          <img
-            src={urlFor(authorImage)
-              .width(50)
-              .url()}
-          />
-        </div>
-      )}
-      <PortableText 
-        value={body}
-      />
+      <div className={styles.postHeader}>
+        <h1>{title}</h1>
+        <p>By {name}</p>
+      </div>
+      <div className={styles.postBody}>
+        <PortableText 
+          value={body}
+        />
+      </div>
     </article>
+  )
+}
+
+Post.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <MainLayout>
+      <PostLayout>
+        {page}
+      </PostLayout>
+    </MainLayout>
   )
 }
 
