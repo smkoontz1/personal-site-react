@@ -1,5 +1,5 @@
 import { ReactElement } from 'react'
-import styles from '../../../styles/Post.module.scss'
+import styles from '../../../styles/blog/post/Post.module.scss'
 
 interface Props {
   children: ReactElement

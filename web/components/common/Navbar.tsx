@@ -1,29 +1,34 @@
 import Link from 'next/link'
 import styles from '../../styles/common/Navbar.module.scss'
+import { useRouter } from 'next/router'
 
 interface NavItem {
   displayText: string
   route: string
 }
 
+const navItems: NavItem[] = [
+  {
+    displayText: 'Photography',
+    route: '/photography'
+  },
+  {
+    displayText: 'Blog',
+    route: '/blog'
+  }
+]
+
 export default function Navbar() {
-
-  const navItems: NavItem[] = [
-    {
-      displayText: 'Blog',
-      route: '/blog'
-    },
-    {
-      displayText: 'Photos',
-      route: './photos'
-    }
-  ]
-
+  const router = useRouter()
+  
   const navItemLinks = navItems.map(item => {
+    console.log(router)
+    const isActive = router.pathname.startsWith(item.route)
+    
     return (
       <Link href={item.route}>
-        <a className={styles.navItem} target="_self">
-          {item.displayText}
+        <a className={`${styles.navItem}${isActive ? ` ${styles.active}` : ''}`} target="_self">
+          {item.displayText.toUpperCase()}
         </a>
       </Link>
     )

@@ -1,13 +1,13 @@
 import { NextPage } from 'next'
-import SanityClient from '../../sanityClient'
+import SanityClient from '../../../sanityClient'
 import groq from 'groq'
 import imageUrlBuilder from '@sanity/image-url'
 import { PortableText } from '@portabletext/react'
-import styles from '../../styles/Post.module.scss'
-import { NextPageWithLayout } from '../_app'
+import styles from '../../../styles/blog/post/Post.module.scss'
+import { NextPageWithLayout } from '../../_app'
 import { ReactElement } from 'react'
-import PostLayout from '../../components/blog/post/PostLayout'
-import MainLayout from '../../components/common/MainLayout'
+import PostLayout from '../../../components/blog/post/PostLayout'
+import MainLayout from '../../../components/common/MainLayout'
 
 interface Props {
   post: any

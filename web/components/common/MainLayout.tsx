@@ -11,7 +11,7 @@ export default function MainLayout(props: Props) {
   const { children } = props
   
   return (
-    <div className={`${styles.imgFullScreen} ${styles.blogBg}`}>
+    <div className={`${styles.imgFullScreen} ${styles.mainBg}`}>
       <Header />
       <div className={styles.mainContainer}>
         <div className={styles.contentContainer}>
