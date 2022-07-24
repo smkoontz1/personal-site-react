@@ -5,6 +5,7 @@ import { NextPageWithLayout } from '../_app'
 import groq from 'groq'
 import imageUrlBuilder from '@sanity/image-url'
 import { SanityImageSource } from '@sanity/image-url/lib/types/types'
+import AlbumPreviewCard from '../../components/photography/album/AlbumPreviewCard'
 
 interface Props {
   albumPreviews: AlbumPreviewResponse[]
@@ -14,7 +15,7 @@ interface AlbumPreviewResponse {
   _id: string
   title: string
   slug: { current: string }
-  images: SanityImageSource[]
+  coverImage: SanityImageSource
 }
 
 function urlFor(source: SanityImageSource) {
@@ -22,18 +23,29 @@ function urlFor(source: SanityImageSource) {
 }
 
 export const Photography: NextPageWithLayout<Props> = ({ albumPreviews }) => {
-  const testPreview = albumPreviews[0]
-  const imageDeal = testPreview.images[0]
-
   return (
-    <>
-      <h1>{testPreview.title}</h1>
-      <div>
-        <img 
-          src={urlFor(imageDeal).width(200).url()}
-        />
-      </div>
-    </>
+    <ul>
+      {albumPreviews && albumPreviews.map((albumPreview) => {
+        const {
+          _id,
+          title,
+          slug,
+          coverImage
+        } = albumPreview
+
+        return (
+          slug && (
+            <li key={_id}>
+              <AlbumPreviewCard
+                title={title}
+                slug={slug.current}
+                coverImgUrl={urlFor(coverImage).url()}
+              />
+            </li>
+          )
+        )
+      })}
+    </ul>
   )
 }
 
@@ -51,8 +63,8 @@ export async function getStaticProps() {
       _id,
       title,
       slug,
-      images
-    }`
+      "coverImage": images[0]
+    } | order(title asc)`
   ) as AlbumPreviewResponse[]
 
   return {

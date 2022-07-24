@@ -21,34 +21,32 @@ interface PostPreviewResponse {
 
 export const Blog: NextPageWithLayout<Props> = ({ postPreviews }) => {
   return (
-    <div>
-      <ul>
-        {postPreviews && postPreviews.map((postPreview) => {
-          const {
-            _id,
-            title,
-            slug,
-            author,
-            publishedAt,
-            excerpt
-          } = postPreview
-          
-          return (
-            slug && (
-              <li key={_id}>
-                <PostPreviewCard
-                  title={title}
-                  date={new Date(publishedAt)}
-                  author={author}
-                  excerpt={excerpt}
-                  slug={slug.current}
-                />
-              </li>
-            )
+    <ul>
+      {postPreviews && postPreviews.map((postPreview) => {
+        const {
+          _id,
+          title,
+          slug,
+          author,
+          publishedAt,
+          excerpt
+        } = postPreview
+        
+        return (
+          slug && (
+            <li key={_id}>
+              <PostPreviewCard
+                title={title}
+                date={new Date(publishedAt)}
+                author={author}
+                excerpt={excerpt}
+                slug={slug.current}
+              />
+            </li>
           )
-        })}
-      </ul>
-    </div>
+        )
+      })}
+    </ul>
   )
 }
 
