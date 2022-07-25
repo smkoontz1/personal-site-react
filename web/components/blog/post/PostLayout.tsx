@@ -9,7 +9,7 @@ export default function PostLayout(props: Props) {
   const { children } = props
 
   return (
-    <div className={`${styles.postContainer} ${styles.page}`}>
+    <div className={styles.postContainer}>
       {children}
     </div>
   )

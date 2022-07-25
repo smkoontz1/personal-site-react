@@ -3,9 +3,9 @@ import MainLayout from '../../components/common/MainLayout'
 import SanityClient from '../../sanityClient'
 import { NextPageWithLayout } from '../_app'
 import groq from 'groq'
-import imageUrlBuilder from '@sanity/image-url'
 import { SanityImageSource } from '@sanity/image-url/lib/types/types'
 import AlbumPreviewCard from '../../components/photography/album/AlbumPreviewCard'
+import { urlFor } from '../../utilities/sanityUtils'
 
 interface Props {
   albumPreviews: AlbumPreviewResponse[]
@@ -16,10 +16,6 @@ interface AlbumPreviewResponse {
   title: string
   slug: { current: string }
   coverImage: SanityImageSource
-}
-
-function urlFor(source: SanityImageSource) {
-  return imageUrlBuilder(SanityClient).image(source)
 }
 
 export const Photography: NextPageWithLayout<Props> = ({ albumPreviews }) => {

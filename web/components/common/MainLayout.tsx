@@ -5,13 +5,17 @@ import styles from '../../styles/common/Common.module.scss'
 
 interface Props {
   children: ReactElement
+  useBackgroundImage?: boolean
 }
 
 export default function MainLayout(props: Props) {
-  const { children } = props
+  const { 
+    children,
+    useBackgroundImage = true,
+  } = props
   
   return (
-    <div className={`${styles.imgFullScreen} ${styles.mainBg}`}>
+    <div className={`${styles.imgFullScreen} ${useBackgroundImage ? styles.mainBg : styles.solidBg}`}>
       <Header />
       <div className={styles.mainContainer}>
         <div className={styles.contentContainer}>

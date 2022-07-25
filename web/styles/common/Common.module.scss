@@ -4,6 +4,10 @@
   background-attachment: fixed;
   background-size: cover;
   
+  &.solidBg {
+    background-color: gray;
+  }
+
   &.mainBg {
     background-image: url('../../assets/images/bg_trees_1_web.jpg');
   }

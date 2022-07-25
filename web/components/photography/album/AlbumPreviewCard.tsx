@@ -22,7 +22,7 @@ export default function AlbumPreviewCard(props: Props) {
           <div className='relative'>
             <Link href='photo/album/[slug]' as={`photo/album/${slug}`}>
               <a>
-                <img src={coverImgUrl} />
+                <img loading='lazy' src={coverImgUrl} />
                 <div className={styles.albumPreviewTitleContainer}>
                   <p className={styles.albumPreviewTitle}>
                     {title.toUpperCase()}

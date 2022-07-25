@@ -1,40 +1,23 @@
-import { NextPage } from 'next'
 import SanityClient from '../../../sanityClient'
 import groq from 'groq'
-import imageUrlBuilder from '@sanity/image-url'
 import { PortableText } from '@portabletext/react'
 import styles from '../../../styles/blog/post/Post.module.scss'
 import { NextPageWithLayout } from '../../_app'
 import { ReactElement } from 'react'
 import PostLayout from '../../../components/blog/post/PostLayout'
 import MainLayout from '../../../components/common/MainLayout'
+import { SanityImageSource } from '@sanity/image-url/lib/types/types'
+import { TypedObject } from '@sanity/types/dist/dts'
 
 interface Props {
-  post: any
+  post: PostResponse
 }
 
-const builder = imageUrlBuilder(SanityClient)
-
-function urlFor (source: any) {
-  return builder.image(source)
-}
-
-const ptComponents = {
-  types: {
-    image: ({ value }: { value: any }) => {
-      if (!value?.asset?._ref) {
-        return null
-      }
-      
-      return (
-        <img
-          alt={value.alt || ' '}
-          loading='lazy'
-          src={urlFor(value).width(320).height(240).fit('max').auto('format').url()}
-        />
-      )
-    }
-  }
+interface PostResponse {
+  title: string
+  name: string
+  authorImage: SanityImageSource,
+  body: TypedObject  
 }
 
 const Post: NextPageWithLayout<Props> = ({ post }) => {
@@ -70,13 +53,6 @@ Post.getLayout = function getLayout(page: ReactElement) {
   )
 }
 
-const query = groq`*[_type == "post" && slug.current == $slug][0]{
-  title,
-  "name": author->name,
-  "authorImage": author->image,
-  body
-}`
-
 export async function getStaticPaths() {
   const paths = await SanityClient.fetch(
     groq`*[_type == "post" && defined(slug.current)][].slug.current`
@@ -88,9 +64,16 @@ export async function getStaticPaths() {
   }
 }
 
+const postQuery = groq`*[_type == "post" && slug.current == $slug][0]{
+  title,
+  "name": author->name,
+  "authorImage": author->image,
+  body
+}`
+
 export async function getStaticProps(context: any) {
   const { slug = '' } = context.params
-  const post = await SanityClient.fetch(query, { slug })
+  const post = await SanityClient.fetch(postQuery, { slug }) as PostResponse
 
   return {
     props: {

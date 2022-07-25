@@ -1,17 +1,7 @@
 .postContainer {
-  &.page {
-    @apply
-      max-w-4xl
-  }
-
-  &.excerpt {
-    @apply
-      max-w-2xl
-      mb-5
-  }
-  
   @apply
-    bg-white
+  bg-white
+    max-w-4xl
     bg-opacity-95
     p-5
     rounded-md
