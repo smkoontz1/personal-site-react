@@ -2,7 +2,9 @@ import Link from 'next/link'
 import { PortableText } from '@portabletext/react'
 import { TypedObject } from '@sanity/types/dist/dts'
 import PreviewCard from '../../common/PreviewCard'
+import { FaArrowRight } from 'react-icons/fa'
 import styles from '../../../styles/blog/post/Post.module.scss'
+import { DateTime } from 'luxon'
 
 interface Props {
   title: string,
@@ -21,12 +23,14 @@ export default function PostPreviewCard(props: Props) {
     slug
   } = props
 
+  const formattedDate = DateTime.fromJSDate(date).toFormat('dd LLL yyyy')
+
   return (
     <PreviewCard>
       <>
         <div className={styles.postHeader}>
           <h1>{title}</h1>
-          <p>{date.toDateString()} - {author}</p>
+          <p>{formattedDate} - {author}</p>
         </div>
         <div className={styles.postBody}>
           <PortableText
@@ -36,8 +40,7 @@ export default function PostPreviewCard(props: Props) {
         <div className='flex flex-row mt-5 justify-end'>
           <Link href='blog/post/[slug]' as={`blog/post/${slug}`}>
             <a className={styles.readMoreLink} target="_self">
-              Read More
-              <i className='octicon arrow-right height:24'></i>
+              Read More <FaArrowRight className={styles.arrow} />
             </a>
           </Link>
         </div>

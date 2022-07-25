@@ -65,6 +65,15 @@
 }
 
 .readMoreLink {
+  
+  .arrow {
+    @apply
+      inline-block
+      align-text-top
+      fill-current
+      overflow-visible
+  }
+  
   @apply
     mr-5
     transition
