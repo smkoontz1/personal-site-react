@@ -25,7 +25,7 @@ export default function Navbar() {
     const isActive = router.pathname.startsWith(item.route)
     
     return (
-      <Link href={item.route}>
+      <Link key={item.displayText} href={item.route}>
         <a className={`${styles.navItem}${isActive ? ` ${styles.active}` : ''}`} target="_self">
           {item.displayText.toUpperCase()}
         </a>
