@@ -75,8 +75,6 @@ export async function getStaticProps(context: any) {
   const { slug = '' } = context.params
   const album = await SanityClient.fetch(photoAlbumQuery, { slug }) as AlbumResponse
 
-  console.log(album)
-
   return {
     props: {
       album: album ?? {}

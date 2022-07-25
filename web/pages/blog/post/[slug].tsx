@@ -54,8 +54,6 @@ export async function getStaticPaths() {
     groq`*[_type == "post" && defined(slug.current)][].slug.current`
   )
 
-  console.log(paths)
-
   return {
     paths: paths.map((slug: any) => ({ params: { slug } })),
     fallback: true
@@ -72,8 +70,6 @@ const postQuery = groq`*[_type == "post" && slug.current == $slug][0]{
 export async function getStaticProps(context: any) {
   const { slug = '' } = context.params
   const post = await SanityClient.fetch(postQuery, { slug }) as PostResponse
-
-  console.log(post)
 
   return {
     props: {
