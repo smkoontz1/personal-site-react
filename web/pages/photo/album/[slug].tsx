@@ -19,22 +19,20 @@ interface AlbumResponse {
 }
 
 const Album: NextPageWithLayout<Props> = ({ album }) => {
-  const {
-    title,
-    images
-  } = album
+  // TODO: destructure the props
+  // For some reason it breaks the build
   
-  const imageGalleryItems: ReactImageGalleryItem[] = images.map(img => {
+  const imageGalleryItems: ReactImageGalleryItem[] = album?.images.map(img => {
     return {
       original: urlFor(img).url(),
       thumbnail: urlFor(img).width(200).url()
     }
-  })
+  }) ?? []
 
   return (
     <>
       <div className={styles.albumHeader}>
-        <h1>{title}</h1>
+        <h1>{album?.title}</h1>
       </div>
       <ImageGallery
         items={imageGalleryItems}
@@ -77,9 +75,11 @@ export async function getStaticProps(context: any) {
   const { slug = '' } = context.params
   const album = await SanityClient.fetch(photoAlbumQuery, { slug }) as AlbumResponse
 
+  console.log(album)
+
   return {
     props: {
-      album
+      album: album ?? {}
     }
   }
 }

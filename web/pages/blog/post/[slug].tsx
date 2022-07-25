@@ -21,22 +21,18 @@ interface PostResponse {
 }
 
 const Post: NextPageWithLayout<Props> = ({ post }) => {
-  const {
-    title,
-    name,
-    authorImage,
-    body = []
-  } = post
-
+  // TODO: destructure the props
+  // For some reason it breaks the build
+  
   return (
     <article>
       <div className={styles.postHeader}>
-        <h1>{title}</h1>
-        <p>By {name}</p>
+        <h1>{post?.title}</h1>
+        <p>By {post?.name}</p>
       </div>
       <div className={styles.postBody}>
         <PortableText 
-          value={body}
+          value={post?.body}
         />
       </div>
     </article>
@@ -58,6 +54,8 @@ export async function getStaticPaths() {
     groq`*[_type == "post" && defined(slug.current)][].slug.current`
   )
 
+  console.log(paths)
+
   return {
     paths: paths.map((slug: any) => ({ params: { slug } })),
     fallback: true
@@ -75,9 +73,11 @@ export async function getStaticProps(context: any) {
   const { slug = '' } = context.params
   const post = await SanityClient.fetch(postQuery, { slug }) as PostResponse
 
+  console.log(post)
+
   return {
     props: {
-      post
+      post: post ?? {}
     }
   }
 }
