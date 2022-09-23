@@ -8,6 +8,7 @@ import PostLayout from '../../../components/blog/post/PostLayout'
 import MainLayout from '../../../components/common/MainLayout'
 import { SanityImageSource } from '@sanity/image-url/lib/types/types'
 import { TypedObject } from '@sanity/types/dist/dts'
+import { DateTime } from 'luxon'
 
 interface Props {
   post: PostResponse
@@ -15,20 +16,22 @@ interface Props {
 
 interface PostResponse {
   title: string
-  name: string
+  authorName: string,
   authorImage: SanityImageSource,
+  publishedAt: string,
   body: TypedObject  
 }
 
 const Post: NextPageWithLayout<Props> = ({ post }) => {
   // TODO: destructure the props
   // For some reason it breaks the build
-  
+  const formattedDate = DateTime.fromJSDate(new Date(post.publishedAt)).toFormat('dd LLL yyyy')
+
   return (
     <article>
       <div className={styles.postHeader}>
         <h1>{post?.title}</h1>
-        <p>By {post?.name}</p>
+        <p>{formattedDate} - {post?.authorName}</p>
       </div>
       <div className={styles.postBody}>
         <PortableText 
@@ -62,8 +65,9 @@ export async function getStaticPaths() {
 
 const postQuery = groq`*[_type == "post" && slug.current == $slug][0]{
   title,
-  "name": author->name,
+  "authorName": author->name,
   "authorImage": author->image,
+  publishedAt,
   body
 }`
 
