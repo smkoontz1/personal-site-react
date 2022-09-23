@@ -25,7 +25,7 @@ interface PostResponse {
 const Post: NextPageWithLayout<Props> = ({ post }) => {
   // TODO: destructure the props
   // For some reason it breaks the build
-  const formattedDate = DateTime.fromJSDate(new Date(post.publishedAt)).toFormat('dd LLL yyyy')
+  const formattedDate = DateTime.fromJSDate(new Date(post?.publishedAt)).toFormat('dd LLL yyyy')
 
   return (
     <article>
