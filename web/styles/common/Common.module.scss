@@ -19,7 +19,9 @@
 
 .mainContent {
   margin-top: $nav-height;
-  padding-top: 1rem;
+  margin-bottom: $footer-height;
+  padding: 1rem 0 1rem 0;
+  background-color: $gray-400;
 }
 
 .previewCard {

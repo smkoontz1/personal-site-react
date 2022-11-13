@@ -1,12 +1,10 @@
 
-.albumHeader {
-  h1 {
-    @apply
-      text-xl
-      font-semibold
-      uppercase
-  }
+.previewCardShell {
+  margin-bottom: 1rem;
+  font-size: $h5-font-size;
+}
 
-  @apply
-    mb-5
+.previewCardButtonShell {
+  display: flex;
+  justify-content: flex-end;
 }
