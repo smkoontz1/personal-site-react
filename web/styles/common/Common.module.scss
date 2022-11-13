@@ -17,25 +17,9 @@
   }
 }
 
-.mainContainer {
-  @apply
-    container
-    mx-auto
-    min-h-screen
-}
-
-.contentContainer {
-  @apply
-    flex
-    flex-col
-    justify-center
-    items-center
-}
-
-.content {
-  @apply
-    mt-24
-    mb-24
+.mainContent {
+  margin-top: $nav-height;
+  padding-top: 1rem;
 }
 
 .previewCard {

@@ -1,12 +1,13 @@
 .navbarShell {
-  min-height: 3.5rem;
+  padding: 0;
+  min-height: $nav-height;
   background-color: $light;
 }
 
 .navbarBrand {
   display: flex;
   align-items: center;
-  min-height: 3.5rem;
+  min-height: $nav-height;
   font-size: $h3-font-size;
   padding: 0;
 }

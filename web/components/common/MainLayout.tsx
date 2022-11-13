@@ -1,6 +1,6 @@
 import { ReactElement } from 'react'
 import styles from '../../styles/common/Common.module.scss'
-import { Button, Container, Nav, Navbar } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
 import Navigation from './Navigation'
 
 interface Props {
@@ -17,9 +17,11 @@ export default function MainLayout(props: Props) {
   return (
     <>
       <Navigation />
-      <Container>
-        {children}
-      </Container>
+      <main className={styles.mainContent}>
+        <Container>
+          {children}
+        </Container>
+      </main>
     </>
   )
 }
