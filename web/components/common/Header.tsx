@@ -1,4 +1,4 @@
-import Navbar from './Navbar'
+import Navbar from './Navigation'
 import styles from '../../styles/common/Header.module.scss'
 
 export default function Header() {

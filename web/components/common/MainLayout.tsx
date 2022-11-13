@@ -1,7 +1,7 @@
 import { ReactElement } from 'react'
-import Footer from './Footer'
-import Header from './Header'
 import styles from '../../styles/common/Common.module.scss'
+import { Button, Container, Nav, Navbar } from 'react-bootstrap'
+import Navigation from './Navigation'
 
 interface Props {
   children: ReactElement
@@ -11,20 +11,15 @@ interface Props {
 export default function MainLayout(props: Props) {
   const { 
     children,
-    useBackgroundImage = true,
+    useBackgroundImage = false,
   } = props
   
   return (
-    <div className={`${styles.imgFullScreen} ${useBackgroundImage ? styles.mainBg : styles.solidBg}`}>
-      <Header />
-      <div className={styles.mainContainer}>
-        <div className={styles.contentContainer}>
-          <div className={styles.content}>
-            {children}
-          </div>
-        </div>
-      </div>
-      <Footer />
-    </div>
+    <>
+      <Navigation />
+      <Container>
+        {children}
+      </Container>
+    </>
   )
 }
