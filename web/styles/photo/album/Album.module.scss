@@ -1,10 +1,14 @@
-
-.previewCardShell {
-  margin-bottom: 1rem;
-  font-size: $h5-font-size;
+.albumPage {
+  background-color: $light;
+  padding: 1rem;
+  border-radius: .375rem;
 }
 
-.previewCardButtonShell {
+.albumCardBody {
+  background-color: $light;
+}
+
+.footerButtonShell {
   display: flex;
   justify-content: flex-end;
 }

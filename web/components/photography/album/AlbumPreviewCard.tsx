@@ -16,23 +16,28 @@ export default function AlbumPreviewCard(props: Props) {
     coverImgUrl
   } = props
 
+  const cardImg = <Card.Img src={coverImgUrl} alt='Card image' />
+  
+  const cardBody =
+    <Card.Body>
+      <Container>
+        <Row>
+          <Col>
+            <Card.Text>{title.toUpperCase()}</Card.Text>
+          </Col>
+          <Col className={styles.footerButtonShell}>
+            <Link href={`photo/album/[slug]`} as={`photo/album/${slug}`} passHref>
+              <Button variant='secondary'>View Album</Button>
+            </Link>
+          </Col>
+        </Row>
+      </Container>
+    </Card.Body>
+
   return (
-    <div className={styles.previewCardShell}>
-      <Card>
-        <Card.Img src={coverImgUrl} alt='Card image' />
-        <Card.Body>
-          <Container fluid>
-            <Row>
-              <Col>
-                <Card.Text>{title.toUpperCase()}</Card.Text>
-              </Col>
-              <Col className={styles.previewCardButtonShell}>
-                <Button variant='secondary'>View Album</Button>
-              </Col>
-            </Row>
-          </Container>
-        </Card.Body>
-      </Card>
-    </div>
+    <PreviewCard
+      cardImage={cardImg}
+      cardBody={cardBody}
+    />
   )
 }

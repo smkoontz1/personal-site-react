@@ -1,17 +1,3 @@
 .headerContainer {
-  @apply
-    fixed
-    top-0
-    z-10
-}
-
-.headerGradient {
-  @apply
-    absolute
-    top-16
-    h-8
-    w-screen
-    bg-gradient-to-b
-    from-gray-50
-    z-0
+  border-bottom: 1px solid $gray-900;
 }

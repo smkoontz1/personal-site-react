@@ -5,6 +5,8 @@ import { NextPageWithLayout } from '../_app'
 import groq from 'groq'
 import PostPreviewCard from '../../components/blog/post/PostPreviewCard'
 import { TypedObject } from '@sanity/types/dist/dts'
+import { Col, Row } from 'react-bootstrap'
+import styles from '../../styles/blog/post/Post.module.scss'
 
 interface Props {
   postPreviews: PostPreviewResponse[]
@@ -21,7 +23,7 @@ interface PostPreviewResponse {
 
 export const Blog: NextPageWithLayout<Props> = ({ postPreviews }) => {
   return (
-    <ul>
+    <>
       {postPreviews && postPreviews.map((postPreview) => {
         const {
           _id,
@@ -34,19 +36,21 @@ export const Blog: NextPageWithLayout<Props> = ({ postPreviews }) => {
         
         return (
           slug && (
-            <li key={_id}>
-              <PostPreviewCard
-                title={title}
-                date={new Date(publishedAt)}
-                author={author}
-                excerpt={excerpt}
-                slug={slug.current}
-              />
-            </li>
+            <Row className={styles.postPreviewRow}>
+              <Col md={8}>
+                <PostPreviewCard
+                  title={title}
+                  date={new Date(publishedAt)}
+                  author={author}
+                  excerpt={excerpt}
+                  slug={slug.current}
+                />
+              </Col>
+            </Row>
           )
         )
       })}
-    </ul>
+    </>
   )
 }
 

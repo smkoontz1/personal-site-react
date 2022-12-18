@@ -1,83 +1,51 @@
-.postContainer {
-  @apply
-  bg-white
-    max-w-4xl
-    bg-opacity-95
-    p-5
-    rounded-md
+.postPage {
+  background-color: $light;
+  padding: 1rem;
+  border-radius: .375rem;
 }
 
 .postHeader {
   h1 {
-    @apply
-      text-xl
-      font-semibold
-      uppercase
+    font-size: 1.25rem;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
   }
 
-  @apply
-    mb-5
+  p {
+    font-size: 1rem;
+  }
+  
+  margin-bottom: 1.5rem;
 }
 
 .postBody {
   h2 {
-    @apply
-      text-base
-      font-semibold
-      uppercase
+    font-size: 1rem;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    line-height: 1.5rem;
   }
 
-  p {
-    @apply
-      mt-5
-      mb-5
+  section, p {
+    font-size: 1rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
   }
 
   a {
-    @apply
-      underline
-      text-gray-700
-  }
-}
-
-.postImageContainer {
-  @apply
-    flex
-    justify-center
-}
-
-.postImage {
-  max-width: 50%;
-
-  p {
-    @apply
-      text-sm
-      text-center
-      mb-0
-      mt-2
+    text-decoration: underline;
+    color: $gray-700
   }
 
-  @apply
-    flex
-    flex-col
-    justify-center
-    items-center
+  margin-bottom: 1rem;
 }
 
-.readMoreLink {
-  
-  .arrow {
-    @apply
-      inline-block
-      align-text-top
-      fill-current
-      overflow-visible
-  }
-  
-  @apply
-    mr-5
-    transition
-    duration-200
-    ease-in
-    transform hover:translate-x-1
+.postPreviewRow {
+  justify-content: center;
+}
+
+.footerButtonShell {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2rem;
 }

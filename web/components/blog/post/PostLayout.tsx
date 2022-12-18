@@ -1,4 +1,5 @@
 import { ReactElement } from 'react'
+import { Col, Row } from 'react-bootstrap'
 import styles from '../../../styles/blog/post/Post.module.scss'
 
 interface Props {
@@ -9,8 +10,10 @@ export default function PostLayout(props: Props) {
   const { children } = props
 
   return (
-    <div className={styles.postContainer}>
-      {children}
-    </div>
+    <Row>
+      <Col className={styles.postPage}>
+        {children}
+      </Col>
+    </Row>
   )
 }

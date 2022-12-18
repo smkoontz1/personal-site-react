@@ -9,7 +9,7 @@ export default function AlbumLayout(props: Props) {
   const { children } = props
 
   return (
-    <div className={styles.albumContainer}>
+    <div className={styles.albumPage}>
       {children}
     </div>
   )

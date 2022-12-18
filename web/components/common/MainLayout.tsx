@@ -1,8 +1,8 @@
 import { ReactElement } from 'react'
 import styles from '../../styles/common/Common.module.scss'
 import { Container } from 'react-bootstrap'
-import Navigation from './Navigation'
 import Footer from './Footer'
+import Navigation from './Navigation'
 
 interface Props {
   children: ReactElement

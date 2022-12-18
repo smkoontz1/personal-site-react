@@ -1,16 +1,20 @@
-import { ReactElement } from 'react'
-import styles from '../../styles/common/Common.module.scss'
+import { Card } from 'react-bootstrap'
+import styles from '../../styles/common/PreviewCard.module.scss'
 
 interface Props {
-  children: ReactElement
+  cardImage?: JSX.Element
+  cardBody: JSX.Element
 }
 
 export default function PreviewCard(props: Props) {
-  const { children } = props
+  const { cardImage, cardBody } = props
   
   return (
-    <div className={styles.previewCard}>
-      {children}
+    <div className={styles.previewCardShell}>
+      <Card bg='light'>
+        {cardImage}
+        {cardBody}
+      </Card>
     </div>
   )
 }
