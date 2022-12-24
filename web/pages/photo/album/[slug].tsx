@@ -25,7 +25,7 @@ const Album: NextPageWithLayout<Props> = ({ album }) => {
   const imageGalleryItems: ReactImageGalleryItem[] = album?.images.map(img => {
     return {
       original: urlFor(img).url(),
-      thumbnail: urlFor(img).width(200).url()
+      thumbnail: urlFor(img).width(200).url(),
     }
   }) ?? []
 
@@ -34,13 +34,15 @@ const Album: NextPageWithLayout<Props> = ({ album }) => {
       <div className={styles.albumHeader}>
         <h1>{album?.title}</h1>
       </div>
-      <ImageGallery
-        items={imageGalleryItems}
-        lazyLoad
-        autoPlay
-        slideDuration={1000}
-        slideInterval={5000}
-      />
+      <div className={styles.galleryComponent}>
+        <ImageGallery
+          items={imageGalleryItems}
+          lazyLoad
+          autoPlay
+          slideDuration={1000}
+          slideInterval={5000}
+        />
+      </div>
     </>
   )
 }
