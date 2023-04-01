@@ -1,25 +1,11 @@
-.duperShell {
-  position: fixed;
-  top: $nav-height;
-  bottom: $footer-height;
-}
-
 .albumPageShell {
   justify-content: center;
-}
-
-.albumContainer {
-  flex: 1 1 auto;
 }
 
 .albumPage {
   background-color: $light;
   padding: 1rem;
   border-radius: .375rem;
-}
-
-.albumCardBody {
-  background-color: $light;
 }
 
 .footerButtonShell {

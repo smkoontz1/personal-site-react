@@ -8,7 +8,6 @@ import ImageGallery, { ReactImageGalleryItem } from 'react-image-gallery'
 import { urlFor } from '../../../utilities/sanityUtils'
 import styles from '../../../styles/photo/album/Album.module.scss'
 import AlbumLayout from '../../../components/photography/album/AlbumLayout'
-import { AIAlbum } from '../../../components/photography/album/AIAlbum'
 
 interface Props {
   album: AlbumResponse
@@ -23,31 +22,25 @@ const Album: NextPageWithLayout<Props> = ({ album }) => {
   // TODO: destructure the props
   // For some reason it breaks the build
   
-  // const imageGalleryItems: ReactImageGalleryItem[] = album?.images.map(img => {
-  //   return {
-  //     original: urlFor(img).url(),
-  //     thumbnail: urlFor(img).width(200).url(),
-  //   }
-  // }) ?? []
-  const images = album?.images.map(img => {
-    return urlFor(img).url()
-  })
+  const imageGalleryItems: ReactImageGalleryItem[] = album?.images.map(img => {
+    return {
+      original: urlFor(img).url(),
+      thumbnail: urlFor(img).width(200).url(),
+    }
+  }) ?? []
 
   return (
     <>
-      <AIAlbum images={images} />
-      {/* <div className={styles.albumHeader}>
-        <h1>{album?.title}</h1>
-      </div>
+      <h1>{album?.title.toUpperCase()}</h1>
       <div className={styles.galleryComponent}>
         <ImageGallery
           items={imageGalleryItems}
           lazyLoad
-          autoPlay
+          thumbnailPosition='right'
           slideDuration={1000}
           slideInterval={5000}
         />
-      </div> */}
+      </div>
     </>
   )
 }

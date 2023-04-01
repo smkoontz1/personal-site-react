@@ -10,12 +10,12 @@ export default function AlbumLayout(props: Props) {
   const { children } = props
 
   return (
-    <>
-      {children}
-    </>
-    // <Row className={styles.albumPageShell}>
-      // <Col md={8} className={styles.albumPage}>
-      // </Col>
-    // </Row>
+    <Row className={styles.albumPageShell}>
+      <Col>
+        <div className={styles.albumPage}>
+          {children}
+        </div>
+      </Col>
+    </Row>
   )
 }

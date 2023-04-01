@@ -11,8 +11,10 @@ export default function PostLayout(props: Props) {
 
   return (
     <Row>
-      <Col className={styles.postPage}>
-        {children}
+      <Col>
+        <div className={styles.postPage}>
+          {children}
+        </div>
       </Col>
     </Row>
   )

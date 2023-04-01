@@ -60,12 +60,12 @@ export const Photography: NextPageWithLayout<Props> = ({ albumPreviews }) => {
     const lastRowElement =
       <Row>
         <Col lg>
-            <AlbumPreviewCard
-              title={lastPreview.title}
-              slug={lastPreview.slug.current}
-              coverImgUrl={urlFor(lastPreview.coverImage).url()}
-            />
-          </Col>
+          <AlbumPreviewCard
+            title={lastPreview.title}
+            slug={lastPreview.slug.current}
+            coverImgUrl={urlFor(lastPreview.coverImage).url()}
+          />
+        </Col>
       </Row>
 
     rowElements = [...rowElements, lastRowElement]
