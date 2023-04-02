@@ -1,17 +1,14 @@
 import { SanityImageSource } from '@sanity/image-url/lib/types/types'
 import groq from 'groq'
-import { ReactElement, useState } from 'react'
+import { ReactElement } from 'react'
 import MainLayout from '../../../components/common/MainLayout'
 import SanityClient from '../../../sanityClient'
 import { NextPageWithLayout } from '../../_app'
 import { urlFor } from '../../../utilities/sanityUtils'
 import styles from '../../../styles/photo/album/Album.module.scss'
 import AlbumLayout from '../../../components/photography/album/AlbumLayout'
-import { PhotoAlbum, Photo } from 'react-photo-album'
-import Lightbox, { Slide } from 'yet-another-react-lightbox'
-import Slideshow from 'yet-another-react-lightbox/plugins/slideshow'
-import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails'
-import Zoom from 'yet-another-react-lightbox/plugins/zoom'
+import { Photo } from 'react-photo-album'
+import PhotoGallery from '../../../components/photography/album/PhotoGallery'
 
 interface Props {
   album: AlbumResponse
@@ -49,7 +46,7 @@ const Album: NextPageWithLayout<Props> = ({ album }) => {
 
   const sanityImages = album?.images as (SanityImageSource & SanityImageSourceRef)[]
 
-  const photoAlbumImages: Photo[] = sanityImages?.map(img => {
+  const photoGalleryImages: Photo[] = sanityImages?.map(img => {
     const imgRef = img.asset._ref
     const dimensions = getDimensions(imgRef)
 
@@ -60,37 +57,11 @@ const Album: NextPageWithLayout<Props> = ({ album }) => {
     }
   })
 
-  const lightboxSlides: Slide[] = photoAlbumImages?.map(({ src, width, height, images }) => {
-    return {
-      src,
-      width,
-      height,
-      srcSet: images?.map((image) => ({
-        src: image.src,
-        width: image.width,
-        height: image.height
-      }))
-    }
-  })
-
-  const [photoIndex, setPhotoIndex] = useState(-1)
-
   return (
     <>
       <h1>{album?.title?.toUpperCase()}</h1>
       <div className={styles.galleryComponent}>
-        <PhotoAlbum
-          layout={'rows'}
-          photos={photoAlbumImages}
-          onClick={({ index }) => setPhotoIndex(index)}
-        />
-        <Lightbox
-          slides={lightboxSlides}
-          open={photoIndex >= 0}
-          index={photoIndex}
-          close={() => { setPhotoIndex(-1) }}
-          plugins={[Slideshow, Thumbnails, Zoom]}
-        />
+        <PhotoGallery photos={photoGalleryImages} />
       </div>
     </>
   )
