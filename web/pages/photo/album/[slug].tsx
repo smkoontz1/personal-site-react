@@ -8,12 +8,10 @@ import { urlFor } from '../../../utilities/sanityUtils'
 import styles from '../../../styles/photo/album/Album.module.scss'
 import AlbumLayout from '../../../components/photography/album/AlbumLayout'
 import { PhotoAlbum, Photo } from 'react-photo-album'
-import { Lightbox, Slide } from 'yet-another-react-lightbox'
-// import Fullscreen from 'yet-another-react-lightbox/plugins/fullscreen'
-// import Slideshow from 'yet-another-react-lightbox/plugins/slideshow'
-// import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails'
-// import Zoom from 'yet-another-react-lightbox/plugins/zoom'
-
+import Lightbox, { Slide } from 'yet-another-react-lightbox'
+import Slideshow from 'yet-another-react-lightbox/plugins/slideshow'
+import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails'
+import Zoom from 'yet-another-react-lightbox/plugins/zoom'
 
 interface Props {
   album: AlbumResponse
@@ -43,7 +41,7 @@ const getDimensions = (sanityImgRef: string): [number, number] => {
   }
 
   return [width, height]
-}
+} 
 
 const Album: NextPageWithLayout<Props> = ({ album }) => {
   // TODO: destructure the props
@@ -51,7 +49,7 @@ const Album: NextPageWithLayout<Props> = ({ album }) => {
 
   const sanityImages = album?.images as (SanityImageSource & SanityImageSourceRef)[]
 
-  const photoAlbumImages: Photo[] = sanityImages.map(img => {
+  const photoAlbumImages: Photo[] = sanityImages?.map(img => {
     const imgRef = img.asset._ref
     const dimensions = getDimensions(imgRef)
 
@@ -62,7 +60,7 @@ const Album: NextPageWithLayout<Props> = ({ album }) => {
     }
   })
 
-  const lightboxSlides: Slide[] = photoAlbumImages.map(({ src, width, height, images }) => {
+  const lightboxSlides: Slide[] = photoAlbumImages?.map(({ src, width, height, images }) => {
     return {
       src,
       width,
@@ -76,11 +74,10 @@ const Album: NextPageWithLayout<Props> = ({ album }) => {
   })
 
   const [photoIndex, setPhotoIndex] = useState(-1)
-  console.log('Rendering', `Cur photo index: ${photoIndex}`)
 
   return (
     <>
-      <h1>{album?.title.toUpperCase()}</h1>
+      <h1>{album?.title?.toUpperCase()}</h1>
       <div className={styles.galleryComponent}>
         <PhotoAlbum
           layout={'rows'}
@@ -91,8 +88,8 @@ const Album: NextPageWithLayout<Props> = ({ album }) => {
           slides={lightboxSlides}
           open={photoIndex >= 0}
           index={photoIndex}
-          close={() => { console.log('Closing'); setPhotoIndex(-1) }}
-          // plugins={[Fullscreen, Slideshow, Thumbnails, Zoom]}
+          close={() => { setPhotoIndex(-1) }}
+          plugins={[Slideshow, Thumbnails, Zoom]}
         />
       </div>
     </>

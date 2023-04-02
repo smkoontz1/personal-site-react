@@ -8,15 +8,15 @@ import AlbumPreviewCard from '../../components/photography/album/AlbumPreviewCar
 import { urlFor } from '../../utilities/sanityUtils'
 import { Col, Row } from 'react-bootstrap'
 
-interface Props {
-  albumPreviews: AlbumPreviewResponse[]
-}
-
 interface AlbumPreviewResponse {
   _id: string
   title: string
   slug: { current: string }
   coverImage: SanityImageSource
+}
+
+interface Props {
+  albumPreviews: AlbumPreviewResponse[]
 }
 
 export const Photography: NextPageWithLayout<Props> = ({ albumPreviews }) => {
