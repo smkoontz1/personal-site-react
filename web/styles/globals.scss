@@ -1,12 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@import "~react-image-gallery/styles/scss/image-gallery.scss";
-
 @import "./custom-bootstrap.scss";
 @import "./custom-variables.scss";
 @import "~bootstrap/scss/bootstrap";
+
+@import "yet-another-react-lightbox/styles.css";
+@import "yet-another-react-lightbox/plugins/thumbnails.css";
 
 body {
   background-color: $page-background-color;
