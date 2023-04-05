@@ -4,11 +4,12 @@ import SanityClient from '../../sanityClient'
 import { NextPageWithLayout } from '../_app'
 import groq from 'groq'
 import { SanityImageSource } from '@sanity/image-url/lib/types/types'
-import AlbumPreviewCard from '../../components/photography/album/AlbumPreviewCard'
+import PhotoCollectionPreviewCard from '../../components/photography/collection/PhotoCollectionPreviewCard'
 import { urlFor } from '../../utilities/sanityUtils'
 import { Col, Row } from 'react-bootstrap'
+import styles from '../../styles/photo/collection/PhotoCollection.module.scss'
 
-interface AlbumPreviewResponse {
+interface PhotoCollectionPreviewResponse {
   _id: string
   title: string
   slug: { current: string }
@@ -16,35 +17,35 @@ interface AlbumPreviewResponse {
 }
 
 interface Props {
-  albumPreviews: AlbumPreviewResponse[]
+  photoCollectionPreviews: PhotoCollectionPreviewResponse[]
 }
 
-export const Photography: NextPageWithLayout<Props> = ({ albumPreviews }) => {
+export const Photography: NextPageWithLayout<Props> = ({ photoCollectionPreviews }) => {
   const rowSize = 2
-  const numRows = albumPreviews.length / rowSize
-  const remainingPreviews = albumPreviews.length % rowSize
+  const numRows = photoCollectionPreviews.length / rowSize
+  const remainingPreviews = photoCollectionPreviews.length % rowSize
   let leftColumnIndex = 0
 
   let rowElements: JSX.Element[] = []
 
   for (let row = 1; row <= numRows; row++) {
-    const leftPreview = albumPreviews[leftColumnIndex]
-    const rightPreview = albumPreviews[leftColumnIndex + 1]
+    const leftPreview = photoCollectionPreviews[leftColumnIndex]
+    const rightPreview = photoCollectionPreviews[leftColumnIndex + 1]
     
     const rowElement =
       <Row>
-        <Col lg>
-          <AlbumPreviewCard
+        <Col lg={6}>
+          <PhotoCollectionPreviewCard
             title={leftPreview.title}
             slug={leftPreview.slug.current}
-            coverImgUrl={urlFor(leftPreview.coverImage).url()}
+            coverImgUrl={urlFor(leftPreview.coverImage).height(720).url()}
           />
         </Col>
-        <Col lg>
-          <AlbumPreviewCard
+        <Col lg={6}>
+          <PhotoCollectionPreviewCard
             title={rightPreview.title}
             slug={rightPreview.slug.current}
-            coverImgUrl={urlFor(rightPreview.coverImage).url()}
+            coverImgUrl={urlFor(rightPreview.coverImage).height(720).url()}
           />
         </Col>
       </Row>
@@ -55,15 +56,15 @@ export const Photography: NextPageWithLayout<Props> = ({ albumPreviews }) => {
 
   if (remainingPreviews > 0)
   {
-    const lastPreview = albumPreviews[albumPreviews.length - 1]
+    const lastPreview = photoCollectionPreviews[photoCollectionPreviews.length - 1]
 
     const lastRowElement =
       <Row>
-        <Col lg>
-          <AlbumPreviewCard
+        <Col lg={6}>
+          <PhotoCollectionPreviewCard
             title={lastPreview.title}
             slug={lastPreview.slug.current}
-            coverImgUrl={urlFor(lastPreview.coverImage).url()}
+            coverImgUrl={urlFor(lastPreview.coverImage).height(720).url()}
           />
         </Col>
       </Row>
@@ -87,18 +88,18 @@ Photography.getLayout = function getLayout(page: ReactElement) {
 }
 
 export async function getStaticProps() {
-  const albumPreviews = await SanityClient.fetch(
-    groq`*[_type == "photoAlbum"]{
+  const photoCollectionPreviews = await SanityClient.fetch(
+    groq`*[_type == "photoCollectionV1"]{
       _id,
       title,
       slug,
       "coverImage": images[0]
     } | order(title asc)`
-  ) as AlbumPreviewResponse[]
+  ) as PhotoCollectionPreviewResponse[]
 
   return {
     props: {
-      albumPreviews
+      photoCollectionPreviews
     }
   }
 }

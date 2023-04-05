@@ -1,8 +1,8 @@
-.albumPageShell {
+.photoCollectionPageShell {
   justify-content: center;
 }
 
-.albumPage {
+.photoCollectionPage {
   background-color: $light;
   padding: 1rem;
   border-radius: .375rem;
@@ -11,4 +11,5 @@
 .footerButtonShell {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
 }

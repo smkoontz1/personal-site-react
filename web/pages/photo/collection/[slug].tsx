@@ -5,17 +5,18 @@ import MainLayout from '../../../components/common/MainLayout'
 import SanityClient from '../../../sanityClient'
 import { NextPageWithLayout } from '../../_app'
 import { urlFor } from '../../../utilities/sanityUtils'
-import styles from '../../../styles/photo/album/Album.module.scss'
-import AlbumLayout from '../../../components/photography/album/AlbumLayout'
+import styles from '../../../styles/photo/collection/PhotoCollection.module.scss'
+import PhotoCollectionLayout from '../../../components/photography/collection/PhotoCollectionLayout'
 import { Photo } from 'react-photo-album'
-import PhotoGallery from '../../../components/photography/album/PhotoGallery'
+import PhotoGallery from '../../../components/photography/collection/PhotoGallery'
 
 interface Props {
-  album: AlbumResponse
+  photoCollection: PhotoCollectionResponse
 }
 
-interface AlbumResponse {
+interface PhotoCollectionResponse {
   title: string,
+  year: number,
   images: SanityImageSource[]
 }
 
@@ -40,18 +41,18 @@ const getDimensions = (sanityImgRef: string): [number, number] => {
   return [width, height]
 } 
 
-const Album: NextPageWithLayout<Props> = ({ album }) => {
+const Album: NextPageWithLayout<Props> = ({ photoCollection }) => {
   // TODO: destructure the props
   // For some reason it breaks the build
 
-  const sanityImages = album?.images as (SanityImageSource & SanityImageSourceRef)[]
+  const sanityImages = photoCollection?.images as (SanityImageSource & SanityImageSourceRef)[]
 
   const photoGalleryImages: Photo[] = sanityImages?.map(img => {
     const imgRef = img.asset._ref
     const dimensions = getDimensions(imgRef)
 
     return {
-      src: urlFor(img).url(),
+      src: urlFor(img).height(720).url(),
       width: dimensions[0],
       height: dimensions[1]
     }
@@ -59,7 +60,7 @@ const Album: NextPageWithLayout<Props> = ({ album }) => {
 
   return (
     <>
-      <h1>{album?.title?.toUpperCase()}</h1>
+      <h1>{photoCollection?.title?.toUpperCase()} - {photoCollection?.year}</h1>
       <div className={styles.galleryComponent}>
         <PhotoGallery photos={photoGalleryImages} />
       </div>
@@ -70,16 +71,16 @@ const Album: NextPageWithLayout<Props> = ({ album }) => {
 Album.getLayout = function getLayout(page: ReactElement) {
   return (
     <MainLayout useBackgroundImage={false}>
-      <AlbumLayout>
+      <PhotoCollectionLayout>
         {page}
-      </AlbumLayout>
+      </PhotoCollectionLayout>
     </MainLayout>
   )
 }
 
 export async function getStaticPaths() {
   const paths = await SanityClient.fetch(
-    groq`*[_type == "photoAlbum" && defined(slug.current)][].slug.current`
+    groq`*[_type == "photoCollectionV1" && defined(slug.current)][].slug.current`
   )
 
   return {
@@ -88,18 +89,19 @@ export async function getStaticPaths() {
   }
 }
 
-const photoAlbumQuery = groq`*[_type == "photoAlbum" && slug.current == $slug][0]{
+const photoCollectionQuery = groq`*[_type == "photoCollectionV1" && slug.current == $slug][0]{
   title,
+  year,
   images
 }`
 
 export async function getStaticProps(context: any) {
   const { slug = '' } = context.params
-  const album = await SanityClient.fetch(photoAlbumQuery, { slug }) as AlbumResponse
+  const photoCollection = await SanityClient.fetch(photoCollectionQuery, { slug }) as PhotoCollectionResponse
 
   return {
     props: {
-      album: album ?? {}
+      photoCollection: photoCollection ?? {}
     }
   }
 }
