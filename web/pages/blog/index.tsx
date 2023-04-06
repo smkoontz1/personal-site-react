@@ -4,49 +4,44 @@ import MainLayout from '../../components/common/MainLayout'
 import { NextPageWithLayout } from '../_app'
 import groq from 'groq'
 import PostPreviewCard from '../../components/blog/post/PostPreviewCard'
-import { TypedObject } from '@sanity/types/dist/dts'
+import { Col, Row } from 'react-bootstrap'
+import styles from '../../styles/blog/post/Post.module.scss'
+import { PostPreviewResponse } from '../../types/blog'
 
 interface Props {
   postPreviews: PostPreviewResponse[]
 }
 
-interface PostPreviewResponse {
-  _id: string
-  title: string
-  slug: { current: string }
-  author: string,
-  publishedAt: string,
-  excerpt: TypedObject
-}
-
 export const Blog: NextPageWithLayout<Props> = ({ postPreviews }) => {
-  return (
-    <ul>
-      {postPreviews && postPreviews.map((postPreview) => {
-        const {
-          _id,
-          title,
-          slug,
-          author,
-          publishedAt,
-          excerpt
-        } = postPreview
-        
-        return (
-          slug && (
-            <li key={_id}>
-              <PostPreviewCard
-                title={title}
-                date={new Date(publishedAt)}
-                author={author}
-                excerpt={excerpt}
-                slug={slug.current}
-              />
-            </li>
-          )
-        )
-      })}
-    </ul>
+  const postPreviewCards = postPreviews?.map(postPreview => {
+    const {
+      _id,
+      title,
+      slug,
+      author,
+      publishedAt,
+      excerpt
+    } = postPreview
+
+    return (
+      slug && (
+        <PostPreviewCard
+          title={title}
+          date={new Date(publishedAt)}
+          author={author}
+          excerpt={excerpt}
+          slug={slug.current}
+        />
+      )
+    )
+  })
+  
+  return postPreviews && (
+    <Row className={styles.postPreviewRow}>
+      <Col md={8}>
+        {postPreviewCards}
+      </Col>
+    </Row>
   )
 }
 

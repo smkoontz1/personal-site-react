@@ -1,51 +1,18 @@
-.navBar {
-  @apply
-    absolute
-    top-0
-    flex
-    flex-row
-    justify-center
-    items-center
-    w-screen
-    mb-10
-    bg-gray-50
-    h-16
-    p-2
+.navbarShell {
+  padding: 0;
+  min-height: $nav-height;
+  background-color: $light;
+  border-bottom: 1px solid $gray-800;
 }
 
-.navLogo {
-  &.inner {
-    @apply
-      ml-1
-      mr-1
-      text-xl
-  }
-  
-  @apply
-    text-3xl
-    mr-10
+.navbarBrand {
+  display: flex;
+  align-items: center;
+  min-height: $nav-height;
+  font-size: $h3-font-size;
+  padding: 0;
 }
 
-.navItem {
-  @apply
-    px-2
-    m-2
-    border-black
-    border-t-2
-    border-b-2
-    border-opacity-0;
-  
-  @apply
-    transition
-    duration-200
-    ease-in
-    hover:border-opacity-100
-    transform
-    hover:scale-110;
-
-  &.active {
-    @apply
-      border-opacity-100
-      scale-110;
-  }
+.navbarBrandInner {
+  font-size: $h5-font-size;
 }

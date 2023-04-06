@@ -1,0 +1,11 @@
+.previewCardShell {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+  font-size: $h5-font-size;
+}
+
+.previewCardButtonShell {
+  display: flex;
+  justify-content: flex-end;
+}

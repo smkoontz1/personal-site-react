@@ -1,38 +1,12 @@
-.footerContainer {
-  @apply
-    fixed
-    bottom-0
-    z-10
-}
-
-.footerBar {
-  @apply
-    absolute
-    bottom-0
-    flex
-    flex-row
-    items-center
-    h-16
-    w-screen
-    bg-black
-}
-
-.footerGradient {
-  @apply
-    absolute
-    bottom-16
-    h-8
-    w-screen
-    bg-gradient-to-t
-    from-black
-}
-
-.footerContent {
-  p {
-    @apply
-      text-white
-  }
-
-  @apply
-    ml-8
+.footerShell {
+  position: fixed;
+  bottom: 0;
+  background-color: $light;
+  border-top: 1px solid $gray-800;
+  height: $footer-height;
+  width: 100%;
+  padding-left: 1rem;
+  display: flex;
+  align-items: center;
+  z-index: 5;
 }

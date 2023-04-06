@@ -1,0 +1,24 @@
+.photoCollectionPageShell {
+  justify-content: center;
+}
+
+.photoCollectionHeaderShell {
+  display: flex;
+  align-items: center;
+}
+
+.backButton {
+  cursor: pointer;
+}
+
+.photoCollectionPage {
+  background-color: $light;
+  padding: 1rem;
+  border-radius: .375rem;
+}
+
+.footerButtonShell {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
