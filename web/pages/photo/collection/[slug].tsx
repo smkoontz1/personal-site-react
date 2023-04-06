@@ -60,7 +60,7 @@ const Album: NextPageWithLayout<Props> = ({ photoCollection }) => {
             </Link>
           </IconContext.Provider>
         </div>
-        <h1>{photoCollection?.title?.toUpperCase()} <span className={'h3'}>({photoCollection?.year})</span></h1>
+        <h2>{photoCollection?.title?.toUpperCase()} <span className={'h4'}>({photoCollection?.year})</span></h2>
       </div>
       <div className={styles.galleryComponent}>
         <PhotoGallery photos={photoGalleryImages} />
