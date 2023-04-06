@@ -18,6 +18,15 @@
   margin-bottom: 1.5rem;
 }
 
+.postHeaderBackShell {
+  display: flex;
+  align-items: center;
+}
+
+.backButton {
+  cursor: pointer;
+}
+
 .postBody {
   h2 {
     font-size: 1rem;

@@ -3,18 +3,10 @@ import MainLayout from '../../components/common/MainLayout'
 import SanityClient from '../../sanityClient'
 import { NextPageWithLayout } from '../_app'
 import groq from 'groq'
-import { SanityImageSource } from '@sanity/image-url/lib/types/types'
 import PhotoCollectionPreviewCard from '../../components/photography/collection/PhotoCollectionPreviewCard'
 import { urlFor } from '../../utilities/sanityUtils'
 import { Col, Row } from 'react-bootstrap'
-import styles from '../../styles/photo/collection/PhotoCollection.module.scss'
-
-interface PhotoCollectionPreviewResponse {
-  _id: string
-  title: string
-  slug: { current: string }
-  coverImage: SanityImageSource
-}
+import { PhotoCollectionPreviewResponse } from '../../types/photo'
 
 interface Props {
   photoCollectionPreviews: PhotoCollectionPreviewResponse[]
@@ -36,16 +28,18 @@ export const Photography: NextPageWithLayout<Props> = ({ photoCollectionPreviews
       <Row>
         <Col lg={6}>
           <PhotoCollectionPreviewCard
-            title={leftPreview.title}
-            slug={leftPreview.slug.current}
-            coverImgUrl={urlFor(leftPreview.coverImage).height(720).url()}
+            title={leftPreview?.title}
+            slug={leftPreview?.slug.current}
+            year={leftPreview?.year}
+            coverImgUrl={urlFor(leftPreview?.coverImage).height(720).url()}
           />
         </Col>
         <Col lg={6}>
           <PhotoCollectionPreviewCard
-            title={rightPreview.title}
-            slug={rightPreview.slug.current}
-            coverImgUrl={urlFor(rightPreview.coverImage).height(720).url()}
+            title={rightPreview?.title}
+            slug={rightPreview?.slug.current}
+            year={rightPreview?.year}
+            coverImgUrl={urlFor(rightPreview?.coverImage).height(720).url()}
           />
         </Col>
       </Row>
@@ -62,9 +56,10 @@ export const Photography: NextPageWithLayout<Props> = ({ photoCollectionPreviews
       <Row>
         <Col lg={6}>
           <PhotoCollectionPreviewCard
-            title={lastPreview.title}
-            slug={lastPreview.slug.current}
-            coverImgUrl={urlFor(lastPreview.coverImage).height(720).url()}
+            title={lastPreview?.title}
+            year={lastPreview?.year}
+            slug={lastPreview?.slug.current}
+            coverImgUrl={urlFor(lastPreview?.coverImage).height(720).url()}
           />
         </Col>
       </Row>
@@ -93,8 +88,9 @@ export async function getStaticProps() {
       _id,
       title,
       slug,
+      year,
       "coverImage": images[0]
-    } | order(title asc)`
+    } | order(year desc, title asc)`
   ) as PhotoCollectionPreviewResponse[]
 
   return {

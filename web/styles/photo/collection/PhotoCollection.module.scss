@@ -2,6 +2,15 @@
   justify-content: center;
 }
 
+.photoCollectionHeaderShell {
+  display: flex;
+  align-items: center;
+}
+
+.backButton {
+  cursor: pointer;
+}
+
 .photoCollectionPage {
   background-color: $light;
   padding: 1rem;

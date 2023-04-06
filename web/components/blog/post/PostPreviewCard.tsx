@@ -44,8 +44,6 @@ export default function PostPreviewCard(props: Props) {
     </Card.Body>
   
   return (
-    <PreviewCard
-      cardBody={cardBody}
-    />
+    <PreviewCard cardBody={cardBody} />
   )
 }

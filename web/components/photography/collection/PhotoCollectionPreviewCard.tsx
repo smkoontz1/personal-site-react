@@ -5,6 +5,7 @@ import { Button, Card, Col, Container, Row } from 'react-bootstrap'
 
 interface Props {
   title: string,
+  year: number,
   slug: string,
   coverImgUrl: string,
 }
@@ -12,6 +13,7 @@ interface Props {
 export default function PhotoCollectionPreviewCard(props: Props) {
   const {
     title,
+    year,
     slug,
     coverImgUrl
   } = props
@@ -23,7 +25,7 @@ export default function PhotoCollectionPreviewCard(props: Props) {
       <Container>
         <Row>
           <Col>
-            <Card.Text>{title.toUpperCase()}</Card.Text>
+            <Card.Text>{title.toUpperCase()} <span className={'h6'}>({year})</span></Card.Text>
           </Col>
           <Col className={styles.footerButtonShell}>
             <Link href={`photo/collection/[slug]`} as={`photo/collection/${slug}`} passHref>

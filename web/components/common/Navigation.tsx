@@ -19,6 +19,8 @@ const navItems: NavItem[] = [
   }
 ]
 
+const currentHomeRoute = '/photo'
+
 export default function Navigation() {
   const router = useRouter()
   
@@ -42,11 +44,13 @@ export default function Navigation() {
       collapseOnSelect
       expand='md'>
       <Container fluid>
-        <Navbar.Brand className={styles.navbarBrand}>
-          <Row>
-            <Col>SENSE <span className={styles.navbarBrandInner}>OF</span> STEVE</Col>
-          </Row>
-        </Navbar.Brand>
+        <Link href={currentHomeRoute} passHref>
+          <Navbar.Brand className={styles.navbarBrand}>
+            <Row>
+              <Col>SENSE <span className={styles.navbarBrandInner}>OF</span> STEVE</Col>
+            </Row>
+          </Navbar.Brand>
+        </Link>
         <Navbar.Toggle aria-controls='responsive-navbar' />
         <Navbar.Collapse id='responsive-navbar'>
           <Nav className='me-auto'>

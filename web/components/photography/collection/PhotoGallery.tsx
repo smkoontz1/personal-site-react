@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { Photo, PhotoAlbum } from 'react-photo-album'
 import Lightbox, { Slide } from 'yet-another-react-lightbox'
 import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails'
+import Fullscreen from 'yet-another-react-lightbox/plugins/fullscreen'
+import Zoom from 'yet-another-react-lightbox/plugins/zoom'
 
 interface Props {
   photos: Photo[]
@@ -36,7 +38,7 @@ export default function PhotoGallery(props: Props) {
         open={index >= 0}
         index={index}
         close={() => { setIndex(-1) }}
-        plugins={[Thumbnails]}
+        plugins={[Thumbnails, Fullscreen, Zoom]}
       />
     </>
   )

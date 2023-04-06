@@ -6,13 +6,11 @@ import Navigation from './Navigation'
 
 interface Props {
   children: ReactElement
-  useBackgroundImage?: boolean
 }
 
 export default function MainLayout(props: Props) {
   const { 
     children,
-    useBackgroundImage = false,
   } = props
   
   return (

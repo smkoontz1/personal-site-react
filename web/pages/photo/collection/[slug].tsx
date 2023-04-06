@@ -9,22 +9,10 @@ import styles from '../../../styles/photo/collection/PhotoCollection.module.scss
 import PhotoCollectionLayout from '../../../components/photography/collection/PhotoCollectionLayout'
 import { Photo } from 'react-photo-album'
 import PhotoGallery from '../../../components/photography/collection/PhotoGallery'
-
-interface Props {
-  photoCollection: PhotoCollectionResponse
-}
-
-interface PhotoCollectionResponse {
-  title: string,
-  year: number,
-  images: SanityImageSource[]
-}
-
-interface SanityImageSourceRef {
-  asset: {
-    _ref: string
-  }
-}
+import { PhotoCollectionResponse, SanityImageSourceRef } from '../../../types/photo'
+import { IconContext } from 'react-icons'
+import { BsArrowLeft } from 'react-icons/bs'
+import Link from 'next/link'
 
 const SANITY_DIMENSIONS_REGEX = /-([0-9]+)x([0-9]+)-[a-z]+$/
 
@@ -40,6 +28,10 @@ const getDimensions = (sanityImgRef: string): [number, number] => {
 
   return [width, height]
 } 
+
+interface Props {
+  photoCollection: PhotoCollectionResponse
+}
 
 const Album: NextPageWithLayout<Props> = ({ photoCollection }) => {
   // TODO: destructure the props
@@ -60,7 +52,16 @@ const Album: NextPageWithLayout<Props> = ({ photoCollection }) => {
 
   return (
     <>
-      <h1>{photoCollection?.title?.toUpperCase()} - {photoCollection?.year}</h1>
+      <div className={styles.photoCollectionHeaderShell}>
+        <div className={`mb-1 me-3 ${styles.backButton}`}>
+          <IconContext.Provider value={{ size: '30' }}>
+            <Link href={'/photo'} passHref>
+              <BsArrowLeft />
+            </Link>
+          </IconContext.Provider>
+        </div>
+        <h1>{photoCollection?.title?.toUpperCase()} <span className={'h3'}>({photoCollection?.year})</span></h1>
+      </div>
       <div className={styles.galleryComponent}>
         <PhotoGallery photos={photoGalleryImages} />
       </div>
@@ -70,7 +71,7 @@ const Album: NextPageWithLayout<Props> = ({ photoCollection }) => {
 
 Album.getLayout = function getLayout(page: ReactElement) {
   return (
-    <MainLayout useBackgroundImage={false}>
+    <MainLayout>
       <PhotoCollectionLayout>
         {page}
       </PhotoCollectionLayout>

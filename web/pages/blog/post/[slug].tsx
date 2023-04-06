@@ -6,20 +6,14 @@ import { NextPageWithLayout } from '../../_app'
 import { ReactElement } from 'react'
 import PostLayout from '../../../components/blog/post/PostLayout'
 import MainLayout from '../../../components/common/MainLayout'
-import { SanityImageSource } from '@sanity/image-url/lib/types/types'
-import { TypedObject } from '@sanity/types/dist/dts'
 import { DateTime } from 'luxon'
+import { PostResponse } from '../../../types/blog'
+import { IconContext } from 'react-icons'
+import { BsArrowLeft } from 'react-icons/bs'
+import Link from 'next/link'
 
 interface Props {
   post: PostResponse
-}
-
-interface PostResponse {
-  title: string
-  authorName: string,
-  authorImage: SanityImageSource,
-  publishedAt: string,
-  body: TypedObject  
 }
 
 const Post: NextPageWithLayout<Props> = ({ post }) => {
@@ -30,7 +24,16 @@ const Post: NextPageWithLayout<Props> = ({ post }) => {
   return (
     <article>
       <div className={styles.postHeader}>
-        <h1>{post?.title}</h1>
+        <div className={styles.postHeaderBackShell}>
+          <div className={`mb-1 me-3 ${styles.backButton}`}>
+            <IconContext.Provider value={{ size: '30' }}>
+              <Link href={'/blog'} passHref>
+                <BsArrowLeft />
+              </Link>
+            </IconContext.Provider>
+          </div>
+          <h1>{post?.title}</h1>
+        </div>
         <p>{formattedDate} - {post?.authorName}</p>
       </div>
       <div className={styles.postBody}>

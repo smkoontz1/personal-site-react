@@ -4,21 +4,12 @@ import MainLayout from '../../components/common/MainLayout'
 import { NextPageWithLayout } from '../_app'
 import groq from 'groq'
 import PostPreviewCard from '../../components/blog/post/PostPreviewCard'
-import { TypedObject } from '@sanity/types/dist/dts'
 import { Col, Row } from 'react-bootstrap'
 import styles from '../../styles/blog/post/Post.module.scss'
+import { PostPreviewResponse } from '../../types/blog'
 
 interface Props {
   postPreviews: PostPreviewResponse[]
-}
-
-interface PostPreviewResponse {
-  _id: string
-  title: string
-  slug: { current: string }
-  author: string,
-  publishedAt: string,
-  excerpt: TypedObject
 }
 
 export const Blog: NextPageWithLayout<Props> = ({ postPreviews }) => {
